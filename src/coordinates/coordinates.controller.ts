@@ -21,15 +21,29 @@ export class CoordinatesController {
         lat: Number(req.body.meters[1]),
         lon: Number(req.body.meters[0]),
       };
-      res.send(this.coordinateService.convertCoordinates(tempCoords, 'meters'));
+      const body = this.coordinateService.convertCoordinates(
+        tempCoords,
+        'meters',
+      );
+      res.send({
+        degrees: [body.x, body.y],
+        meters: req.body.meters,
+      });
     } else if (checkUnitToConvert(req.body) === 'degrees') {
       const tempCoords = {
         lat: Number(req.body.degrees[1]),
         lon: Number(req.body.degrees[0]),
       };
-      res.send(
-        this.coordinateService.convertCoordinates(tempCoords, 'degrees'),
+
+      const body = this.coordinateService.convertCoordinates(
+        tempCoords,
+        'degrees',
       );
+
+      res.send({
+        degrees: req.body.degrees,
+        meters: [body.x, body.y],
+      });
     } else {
       res.statusCode = 400;
       res.send({ error: 'One pair must have the values you want to change' });
