@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Req, Res } from '@nestjs/common';
-import { Request ,Response} from 'express';
+import { Request, Response } from 'express';
 import { CoordinatesService } from './coordinates.service';
 
 @Controller('coordinates')
