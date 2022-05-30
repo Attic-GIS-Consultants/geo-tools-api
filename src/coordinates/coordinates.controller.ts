@@ -26,7 +26,7 @@ export class CoordinatesController {
                 "meters"
             )
             res.send({
-                degrees: [body.x, body.y],
+                degrees: [body.y, body.x],
                 meters: req.body.meters,
             })
         } else if (checkUnitToConvert(req.body) === "degrees") {
@@ -42,7 +42,7 @@ export class CoordinatesController {
 
             res.send({
                 degrees: req.body.degrees,
-                meters: [body.x, body.y],
+                meters: [body.y, body.x],
             })
         } else {
             res.statusCode = 400
