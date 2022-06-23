@@ -19,50 +19,36 @@ export class CoordinatesController {
     } else if (checkUnitToConvert(req.body) === "meters") {
       const tempCoords = {
         lat: Number(req.body.meters[1]),
-        lon: Number(req.body.meters[0])
+        lon: Number(req.body.meters[0]),
       };
-      const body = this.coordinateService.convertCoordinates(
-        tempCoords,
-        "meters"
-      );
+      const body = this.coordinateService.convertCoordinates(tempCoords, "meters");
       res.send({
         degrees: [body.y, body.x],
-        meters: req.body.meters
+        meters: req.body.meters,
       });
     } else if (checkUnitToConvert(req.body) === "degrees") {
       const tempCoords = {
         lat: Number(req.body.degrees[1]),
-        lon: Number(req.body.degrees[0])
+        lon: Number(req.body.degrees[0]),
       };
 
-      const body = this.coordinateService.convertCoordinates(
-        tempCoords,
-        "degrees"
-      );
+      const body = this.coordinateService.convertCoordinates(tempCoords, "degrees");
 
       res.send({
         degrees: req.body.degrees,
-        meters: [body.y, body.x]
+        meters: [body.y, body.x],
       });
     } else {
       res.statusCode = 400;
       res.send({
-        error: "One pair must have the values you want to change"
+        error: "One pair must have the values you want to change",
       });
     }
   }
 }
 
-function checkUnitToConvert(body: {
-  degrees: Array<number>;
-  meters: Array<number>;
-}): string {
-  if (
-    body.degrees[0] == 0 &&
-    body.degrees[1] == 0 &&
-    body.meters[0] == 0 &&
-    body.meters[1] == 0
-  ) {
+function checkUnitToConvert(body: { degrees: Array<number>; meters: Array<number> }): string {
+  if (body.degrees[0] == 0 && body.degrees[1] == 0 && body.meters[0] == 0 && body.meters[1] == 0) {
     return "empty";
   } else if (body.degrees[0] == 0 && body.degrees[1] == 0) {
     return "meters";
