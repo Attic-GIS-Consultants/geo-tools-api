@@ -7,12 +7,10 @@ import { MapController } from "./map/map.controller";
 import { MongooseModule } from "@nestjs/mongoose";
 import { MapsModule } from "./map/map.module";
 //import { MapService } from "./map/map.service";
+import { ConfigModule } from "@nestjs/config";
 @Module({
-  imports: [
-    MapsModule,
-    MongooseModule.forRoot("mongodb+srv://admin:DizzyAttic99@alpha.7srqq.mongodb.net/test")
-  ],
+  imports: [ConfigModule.forRoot(), MapsModule, MongooseModule.forRoot(process.env.local_db)],
   controllers: [AppController, CoordinatesController],
-  providers: [AppService, CoordinatesService]
+  providers: [AppService, CoordinatesService],
 })
 export class AppModule {}
