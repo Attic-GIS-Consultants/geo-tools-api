@@ -24,6 +24,9 @@ export class Map {
 
   @Prop()
   layerListOrder: Array<string>;
+
+  @Prop()
+  center: Array<number>;
 }
 
 export const MapSchema = SchemaFactory.createForClass(Map);
