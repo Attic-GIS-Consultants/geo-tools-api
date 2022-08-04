@@ -1,6 +1,6 @@
-import { Controller, Get, Post, Req, Res } from "@nestjs/common";
-import { Request, Response } from "express";
-import { CoordinatesService } from "./coordinates.service";
+import { Controller, Get, Post, Query, Req, Request, Res } from "@nestjs/common";
+import {  Response } from "express";
+import { CoordinatesService, Feature } from "./coordinates.service";
 
 @Controller("coordinates")
 export class CoordinatesController {
@@ -13,6 +13,7 @@ export class CoordinatesController {
           lon: Number(req.body.lon),
         };
     */
+   /*
     if (checkUnitToConvert(req.body) === "empty") {
       res.statusCode = 400;
       res.send({ error: " Found no coordinates in body" });
@@ -44,6 +45,13 @@ export class CoordinatesController {
         error: "One pair must have the values you want to change",
       });
     }
+    */
+  }
+
+  @Get("/random")
+  generateRandomCoordinates(@Query() q): Array<Feature> {
+    
+    return this.coordinateService.generateRandomCoordinates(q.count, q.crs);
   }
 }
 
